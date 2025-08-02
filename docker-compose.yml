@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: loads-postgres
+    restart: always
+    environment:
+      POSTGRES_DB: loadsdb
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - app-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  springboot-app:
+    build:
+      context: ./  # Make sure Dockerfile exists here
+    container_name: loads-service
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    ports:
+      - "8080:8080"  # Keep this only if you want to access Spring Boot from host browser
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/loadsdb
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: pass
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_PROFILES_ACTIVE: prod
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
