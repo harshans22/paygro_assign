@@ -20,21 +20,20 @@ A Spring Boot application for managing Loads and Bookings with PostgreSQL. Built
 
 ## Project Structure
 
-```
+
 
 src/
 ├── main/
-│   └── java/org/example/paygro\_assign/
-│        ├── controller/
-│        ├── dto/
-│        ├── enums/
-│        ├── exceptions/
-│        ├── model/
-│        ├── repository/
-│        ├── service/
-│        └── PaygroAssignApplication.java
+│ └── java/org/example/paygro_assign/
+│ ├── controller/
+│ ├── dto/
+│ ├── enums/
+│ ├── exceptions/
+│ ├── model/
+│ ├── repository/
+│ ├── service/
+│ └── PaygroAssignApplication.java
 └── test/
-(mirrors main structure for unit tests)
 
 
 ## Running the App with Docker
