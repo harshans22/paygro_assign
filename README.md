@@ -36,61 +36,6 @@ src/
 └── test/
 (mirrors main structure for unit tests)
 
-````
-
-## API Endpoints
-
-### LoadController (`/load`)
-
-| Method | Endpoint       | Description                     |
-|--------|----------------|---------------------------------|
-| POST   | `/load`        | Create a new load               |
-| GET    | `/load`        | List loads (filter, paginate)   |
-| GET    | `/load/{id}`   | Get details of a load           |
-| PUT    | `/load/{id}`   | Update an existing load         |
-| DELETE | `/load/{id}`   | Delete a load                   |
-
-#### Sample Request: Create Load
-
-```json
-POST /load
-{
-  "shipperId": "shipperA",
-  "facility": {
-    "loadingPoint": "New York",
-    "unloadingPoint": "Chicago",
-    "loadingDate": "2025-08-10T08:00:00Z",
-    "unloadingDate": "2025-08-12T18:00:00Z"
-  },
-  "productType": "Electronics",
-  "truckType": "Flatbed",
-  "noOfTrucks": 3,
-  "weight": 12000,
-  "comment": "Handle with care"
-}
-````
-
-### BookingController (`/booking`)
-
-| Method | Endpoint        | Description                  |
-| ------ | --------------- | ---------------------------- |
-| POST   | `/booking`      | Create a new booking         |
-| GET    | `/booking`      | List bookings (with filters) |
-| GET    | `/booking/{id}` | Get booking details          |
-| PUT    | `/booking/{id}` | Update booking               |
-| DELETE | `/booking/{id}` | Delete or cancel a booking   |
-
-#### Sample Request: Create Booking
-
-```json
-POST /booking
-{
-  "loadId": "uuid-of-load",
-  "transporterId": "transporter1",
-  "proposedRate": 1500,
-  "comment": "Can deliver by tomorrow"
-}
-```
 
 ## Running the App with Docker
 
